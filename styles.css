@@ -1,0 +1,80 @@
+/* Layout and typography for the starting page, and the tokens to build the rest with.
+   Use var(--…) rather than repeating hex codes — it is what makes a restyle one edit. */
+:root {
+  --bg:        #f6f7f9;
+  --surface:   #ffffff;
+  --ink:       #12151a;
+  --ink-2:     #444c58;
+  --ink-muted: #6d7785;
+  --line:      #e2e6ec;
+  --accent:    #1b56d3;
+  --accent-fg: #ffffff;
+  --ok:        #1a8a4a;
+  --warn:      #a86400;
+  --bad:       #c02b2b;
+
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
+  --s-5: 24px; --s-6: 32px; --s-7: 48px;
+  --r-1: 6px;  --r-2: 10px; --r-3: 16px;
+  --t-xs: 12px; --t-sm: 14px; --t-md: 16px; --t-lg: 20px; --t-xl: 28px;
+
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --shadow: 0 1px 2px rgba(18, 21, 26, .06), 0 8px 24px -16px rgba(18, 21, 26, .25);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1115; --surface: #171a20; --ink: #f2f4f7; --ink-2: #c3c9d2;
+    --ink-muted: #8d95a1; --line: #272b33; --accent: #6f9bff; --accent-fg: #0b0d10;
+    --ok: #4fd6a0; --warn: #e0a340; --bad: #ff7a7a;
+    --shadow: 0 1px 2px rgba(0,0,0,.5), 0 8px 24px -16px rgba(0,0,0,.8);
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--t-md);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Both briefs are evaluated at 320px, so the frame is fluid from the start. */
+.app { max-width: 880px; margin: 0 auto; padding: var(--s-5) var(--s-4) var(--s-7); }
+.app-header { margin-bottom: var(--s-5); }
+.app-title { font-size: var(--t-xl); line-height: 1.2; margin: 0 0 var(--s-2); letter-spacing: -0.02em; }
+.app-sub { color: var(--ink-muted); margin: 0; font-size: var(--t-sm); }
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-3);
+  padding: var(--s-5);
+  box-shadow: var(--shadow);
+}
+.panel h2 { margin: 0 0 var(--s-3); font-size: var(--t-lg); }
+
+.next-steps { margin: 0; padding-left: var(--s-5); color: var(--ink-2); }
+.next-steps li { margin-bottom: var(--s-2); }
+
+.muted { color: var(--ink-muted); font-size: var(--t-sm); margin-bottom: 0; }
+
+code, kbd {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--r-1);
+  padding: 1px 5px;
+}
+
+/* A visible focus ring, on by default — the usual way keyboard users lose it is an
+   `outline: none` added for looks. Both briefs care about keyboard use. */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
